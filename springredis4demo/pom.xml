@@ -6,7 +6,6 @@
         <artifactId>moogn.demo</artifactId>
         <groupId>com.moogn.demo</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../demo/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -34,19 +33,6 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
-        </dependency>
-
-        <!-- FlexJSON -->
-        <dependency>
-            <groupId>net.sf.flexjson</groupId>
-            <artifactId>flexjson</artifactId>
-            <version>3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <classifier>jdk15</classifier>
         </dependency>
     </dependencies>
 </project>

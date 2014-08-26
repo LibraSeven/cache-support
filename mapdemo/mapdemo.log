@@ -1,0 +1,15 @@
+0     INFO  [localhost-startStop-1] context.ContextLoader - Root WebApplicationContext: initialization started
+83    INFO  [localhost-startStop-1] support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Tue Aug 26 17:56:32 CST 2014]; root of context hierarchy
+122   INFO  [localhost-startStop-1] xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+493   INFO  [localhost-startStop-1] config.PropertyPlaceholderConfigurer - Loading properties file from class path resource [mongodb.properties]
+507   INFO  [localhost-startStop-1] annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+953   INFO  [localhost-startStop-1] context.ContextLoader - Root WebApplicationContext: initialization completed in 953 ms
+991   INFO  [localhost-startStop-1] servlet.DispatcherServlet - FrameworkServlet 'system-mvc-dispatcher': initialization started
+994   INFO  [localhost-startStop-1] support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'system-mvc-dispatcher-servlet': startup date [Tue Aug 26 17:56:33 CST 2014]; parent: Root WebApplicationContext
+994   INFO  [localhost-startStop-1] xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [dispatcher-servlet-system.xml]
+1118  INFO  [localhost-startStop-1] annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+1219  INFO  [localhost-startStop-1] annotation.RequestMappingHandlerMapping - Mapped "{[/geo/nearby.do],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.demo.map.controller.GeoController.nearBy()
+1219  INFO  [localhost-startStop-1] annotation.RequestMappingHandlerMapping - Mapped "{[/geo/getNearBy.do],methods=[POST],params=[],headers=[],consumes=[],produces=[application/json;charset=utf-8],custom=[]}" onto public java.lang.String com.demo.map.controller.GeoController.getNearBy(java.lang.Double,java.lang.Double)
+1220  INFO  [localhost-startStop-1] annotation.RequestMappingHandlerMapping - Mapped "{[//index.do],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.demo.map.controller.IndexController.index()
+1700  INFO  [localhost-startStop-1] handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+1741  INFO  [localhost-startStop-1] servlet.DispatcherServlet - FrameworkServlet 'system-mvc-dispatcher': initialization completed in 750 ms
