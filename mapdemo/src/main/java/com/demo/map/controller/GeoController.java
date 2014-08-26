@@ -25,9 +25,18 @@ public class GeoController {
     public String nearBy(){
         return "nearby";
     }
+    @RequestMapping("/nearbyWithRange.do")
+    public String nearbyWithRange(){
+        return "nearbyWithRange";
+    }
     @RequestMapping(value = "/getNearBy.do",method = RequestMethod.POST,produces ={"application/json; charset=utf-8"} )
     public @ResponseBody String getNearBy(@RequestParam Double lng,@RequestParam Double lat){
         List<DBObject> list=geoService.nearBy(new Point(lng,lat),50);
+        return list.toString();
+    }
+    @RequestMapping(value = "/getNearByWithRange.do",method = RequestMethod.POST,produces ={"application/json; charset=utf-8"} )
+    public @ResponseBody String getNearByWithRange(@RequestParam Double lng,@RequestParam Double lat,@RequestParam double minDistance,@RequestParam double maxDistance){
+        List<DBObject> list=geoService.nearByWithRange(new Point(lng,lat),minDistance,maxDistance);
         return list.toString();
     }
 }

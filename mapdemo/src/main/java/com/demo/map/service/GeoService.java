@@ -11,4 +11,13 @@ import java.util.List;
 public interface GeoService {
 
     public List<DBObject> nearBy(Point center,int count);
+
+    /**
+     *
+     * @param center        center point
+     * @param minDistance   unit:meter
+     * @param maxDistance   unit:meter
+     * @return              returns the documents from nearest to farthest
+     */
+    public List<DBObject> nearByWithRange(Point center,double minDistance,double maxDistance);
 }
