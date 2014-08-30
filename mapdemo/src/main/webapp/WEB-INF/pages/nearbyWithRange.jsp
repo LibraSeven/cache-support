@@ -47,7 +47,7 @@
         $.ajax({
             type:'post',
             url:'<c:url value="/geo/getNearByWithRange.do"/>',
-            data:{lng:point.lng,lat:point.lat,minDistance:0,maxDistance:0.000011},
+            data:{lng:point.lng,lat:point.lat,minDistance:0,maxDistance:100},
             success:function(data){
                 if(data){
                     for(var i=0;i<data.length;i++){
