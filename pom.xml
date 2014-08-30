@@ -12,6 +12,7 @@
         <module>springredis4demo</module>
         <module>nio</module>
         <module>mapdemo</module>
+        <module>httpclientdemo</module>
     </modules>
 
     <properties>
