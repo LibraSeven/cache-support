@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by louis on 2014/8/30.
  */
-public class Demo1 {
+public class GetDemo {
     public static void main(String[] args) throws IOException {
 
         CloseableHttpClient httpClient= HttpClients.createDefault();
