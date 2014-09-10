@@ -13,6 +13,7 @@
         <module>nio</module>
         <module>mapdemo</module>
         <module>httpclientdemo</module>
+        <module>jvm</module>
     </modules>
 
     <properties>

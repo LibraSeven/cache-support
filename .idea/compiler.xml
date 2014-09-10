@@ -23,6 +23,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="httpclientdemo" />
+        <module name="jvm" />
         <module name="mapdemo" />
         <module name="nio" />
         <module name="springredis4demo" />

@@ -147,7 +147,7 @@ public class PortScanner {
 
     public static void main(String[] args) {
         PortScanner portScanner=new PortScanner();
-        portScanner.scan("192.168.1.105",1,1000);
+        portScanner.scan("192.168.0.20",1,65535);
 //        portScanner.scan("74.125.143.115",1,10000);
     }
 }
