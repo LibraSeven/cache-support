@@ -14,6 +14,7 @@
         <module>mapdemo</module>
         <module>httpclientdemo</module>
         <module>jvm</module>
+        <module>algorithm</module>
     </modules>
 
     <properties>
