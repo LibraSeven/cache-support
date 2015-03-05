@@ -22,6 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="algorithm" />
         <module name="httpclientdemo" />
         <module name="jvm" />
         <module name="mapdemo" />
@@ -31,4 +32,3 @@
     </annotationProcessing>
   </component>
 </project>
-
