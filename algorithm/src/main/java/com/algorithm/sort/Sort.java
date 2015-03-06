@@ -43,6 +43,50 @@ public class Sort {
         }
     }
 
+    /**
+     * Divide and Conquer
+     * @param data array
+     * @param p    1
+     * @param r    array length
+     */
+    public static void mergeSort(int[] data, int p, int r) {
+        if (p < r) {
+            int q = (p + r) / 2;
+            mergeSort(data, p, q);
+            mergeSort(data, q + 1, r);
+            merge(data, p, q, r);
+        }
+    }
+
+    private static void merge(int[] data, int p, int q, int r) {
+        int n1 = q - p + 1;   //length of the sub array data[p..q]
+        int n2 = r - q;     //length of the sub array data[q+1,r]
+        //create arrays L and R
+        int[] left = new int[n1 + 1];
+        int[] right = new int[n2 + 1];
+        int i, j;
+        for (i = 0; i < n1; i++) {
+            left[i] = data[p - 1 + i];
+        }
+        for (j = 0; j < n2; j++) {
+            right[j] = data[q + j];
+        }
+        left[n1] = Integer.MAX_VALUE;
+        right[n2] = Integer.MAX_VALUE;
+        // merge two sorted sub array. think playing cards game.
+        i = j = 0;
+        for (int k = p - 1; k < r; k++) {
+            if (left[i] <= right[j]) {
+                data[k] = left[i];
+                i++;
+            } else {
+                data[k] = right[j];
+                j++;
+            }
+        }
+    }
+
+
     public static void swap(int[] data, int i, int j) {
         int temp = data[i];
         data[i] = data[j];
@@ -54,8 +98,8 @@ public class Sort {
         int[] data = {5, 2, 4, 6, 1, 3};
 //        Sort.insertionSort(data);
 //        Sort.bubbleSort(data);
-        Sort.selectionSort(data);
-
+//        Sort.selectionSort(data);
+        Sort.mergeSort(data, 1, data.length);
 
         Sort.print(data);
     }
