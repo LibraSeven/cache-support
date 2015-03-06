@@ -44,7 +44,8 @@ public class Sort {
     }
 
     /**
-     * Divide and Conquer
+     * Divide , Conquer , Combine
+     *
      * @param data array
      * @param p    1
      * @param r    array length
@@ -71,7 +72,7 @@ public class Sort {
         for (j = 0; j < n2; j++) {
             right[j] = data[q + j];
         }
-        left[n1] = Integer.MAX_VALUE;
+        left[n1] = Integer.MAX_VALUE; //sentinel
         right[n2] = Integer.MAX_VALUE;
         // merge two sorted sub array. think playing cards game.
         i = j = 0;
