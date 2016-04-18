@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="#{conf['redis.pool.maxTotal']}"/>
+        <property name="maxIdle" value="#{conf['redis.pool.maxIdle']}"/>
+        <property name="minIdle" value="#{conf['redis.pool.minIdle']}"/>
+        <property name="blockWhenExhausted" value="#{conf['redis.pool.blockWhenExhausted']}"/>
+        <property name="maxWaitMillis" value="#{conf['redis.pool.maxWaitMillis']}"/>
+        <property name="testOnBorrow" value="#{conf['redis.pool.testOnBorrow']}"/>
+        <property name="testOnReturn" value="#{conf['redis.pool.testOnReturn']}"/>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="hostName" value="#{conf['redis.host']}"/>
+        <property name="port" value="#{conf['redis.port']}"/>
+        <property name="usePool" value="true"/>
+        <property name="database" value="1"/>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+
+    <bean id="redisStringCache" class="sun.support.cache.redis.RedisStringCache">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+</beans>
