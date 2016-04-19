@@ -49,6 +49,13 @@ public interface ICache<K, V> extends InitializingBean, DisposableBean {
     void del(Set<K> keys);
 
     /**
+     * remove the value of key
+     *
+     * @param key cache key
+     */
+    void del(String key);
+
+    /**
      * get key collection by pattern match
      *
      * @param pattern regex expression

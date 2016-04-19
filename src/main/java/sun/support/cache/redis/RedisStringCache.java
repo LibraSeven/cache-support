@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import sun.support.cache.StringCache;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -27,7 +28,7 @@ public class RedisStringCache extends StringCache<Object> {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        GsonBuilder gsonBuilder  = new GsonBuilder()
+        GsonBuilder gsonBuilder = new GsonBuilder()
                 .serializeNulls()
                 .setDateFormat("yyyy-MM-ss HH:mm:ss");
         gson = gsonBuilder.create();
@@ -94,6 +95,11 @@ public class RedisStringCache extends StringCache<Object> {
     }
 
     @Override
+    public void del(String key) {
+        redisTemplate.delete(key);
+    }
+
+    @Override
     public Set<String> keys(String pattern) {
         return redisTemplate.keys(pattern);
     }
@@ -122,5 +128,58 @@ public class RedisStringCache extends StringCache<Object> {
             }
         });
     }
+
+
+    public <T> T rightPop(final String key, final Class<T> clazz, final Class... genericType) {
+        return redisTemplate.execute(new RedisCallback<T>() {
+            @Override
+            public T doInRedis(RedisConnection connection) throws DataAccessException {
+                byte[] v = connection.rPop(toByteArray(key));
+                if (v == null || v.length == 0)
+                    return null;
+                return deSerialize(toStr(v), clazz, genericType);
+            }
+        });
+    }
+
+    public <T> void leftPush(final String key, final T value, final Class... genericType) {
+        redisTemplate.execute(new RedisCallback<T>() {
+            @Override
+            public T doInRedis(RedisConnection connection) throws DataAccessException {
+                connection.lPush(toByteArray(key), serialize(value, genericType));
+                return null;
+            }
+        });
+    }
+
+    public Properties info() {
+        return redisTemplate.execute(new RedisCallback<Properties>() {
+            @Override
+            public Properties doInRedis(RedisConnection connection) throws DataAccessException {
+                return connection.info();
+            }
+        });
+    }
+
+    public void flushDB() {
+        redisTemplate.execute(new RedisCallback<Object>() {
+            @Override
+            public Object doInRedis(RedisConnection connection) throws DataAccessException {
+                connection.flushDb();
+                return null;
+            }
+        });
+    }
+
+    public void flushAll() {
+        redisTemplate.execute(new RedisCallback<Object>() {
+            @Override
+            public Object doInRedis(RedisConnection connection) throws DataAccessException {
+                connection.flushAll();
+                return null;
+            }
+        });
+    }
+
 
 }
