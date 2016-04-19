@@ -37,7 +37,7 @@ edit the spring configuration file. add as follows:
 ```
     
     @Cacheable(
-            namespace = BIConstants.CACHE_NAMESPACE,
+            namespace = Constants.CACHE_NAMESPACE,
             fieldsKey = {"#targetCode", "#dept", "#id"},
             genericType = {MobileHomePageEntity.class}
     )
@@ -52,7 +52,7 @@ edit the spring configuration file. add as follows:
 ```
     
     @Cacheable(
-            namespace = BIConstants.CACHE_NAMESPACE,
+            namespace = Constants.CACHE_NAMESPACE,
             fieldsKey = {"#targetCode", "#dept", "#id"},
             genericType = {String.class, MobileHomePageEntity.class}
     )
@@ -66,7 +66,7 @@ edit the spring configuration file. add as follows:
 ```
     
     @Cacheable(
-            namespace = BIConstants.CACHE_NAMESPACE,
+            namespace = Constants.CACHE_NAMESPACE,
             fieldsKey = {"#targetCode", "#dept", "#id"},
             genericType = {Foo.class}
     )
@@ -81,7 +81,7 @@ edit the spring configuration file. add as follows:
 ```
     
     @Cacheable(
-            namespace = BIConstants.CACHE_NAMESPACE,
+            namespace = Constants.CACHE_NAMESPACE,
             fieldsKey = {"#targetCode", "#dept", "#id"},
             expire = 5000,
             genericType = {Foo.class}
