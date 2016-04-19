@@ -1,7 +1,7 @@
 # Cache-Support
 Cache-Support model used on DAO or Service in the J2EE stack. Enhance the speed of user access.
 The idea of cache-support is add annotation on the methods of DAO or Service. Decoupled from the business. 
-So it is very flexible. otherwise, there provide a jsonUtil utility. 
+So it is very flexible. besides, there provide a jsonUtil utility. 
 So far, this cache-support only support redis. it will be extend more in the next phase.
 
 ## Configuration
