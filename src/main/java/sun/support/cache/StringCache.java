@@ -27,6 +27,9 @@ public abstract class StringCache<V> implements ICache<String, V> {
     }
 
     protected byte[] serialize(Object value, Class... genericType) {
+        if(value instanceof String){
+            return ((String) value).getBytes(charset);
+        }
         String result = null;
         if (value instanceof Collection<?>) {
             if (genericType.length == 0)

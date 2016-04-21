@@ -99,6 +99,9 @@ public class JsonUtils {
     }
 
     private static String serialize(Object value, Class... genericType) {
+        if(value instanceof String){
+            return (String)value;
+        }
         String result = null;
         if (value instanceof Collection<?>) {
             if (genericType.length == 0)
