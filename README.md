@@ -10,7 +10,10 @@ edit the spring configuration file. add as follows:
 ```
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer" ref="keyGsonSerializer"/>
     </bean>
+
+    <bean id="keyGsonSerializer" class="sun.support.cache.redis.KeyGsonSerializer"/>
 
     <bean id="redisStringCache" class="sun.support.cache.redis.RedisStringCache">
         <property name="redisTemplate" ref="redisTemplate"/>
