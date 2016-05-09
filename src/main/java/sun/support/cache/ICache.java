@@ -12,14 +12,14 @@ import java.util.Set;
 public interface ICache<K, V> extends InitializingBean, DisposableBean {
 
 
-    void set(K key, V value, Class... genericType);
+    void set(K key, V value);
 
     /**
      * @param key    cache key
      * @param value  cache value
      * @param expire seconds
      */
-    void setEx(K key, V value, long expire, Class... genericType);
+    void setEx(K key, V value, long expire);
 
 
     /**
@@ -30,7 +30,7 @@ public interface ICache<K, V> extends InitializingBean, DisposableBean {
      *
      * @param values A set of cache value
      */
-    void mSet(Map<K, V> values, Class... genericType);
+    void mSet(Map<K, V> values);
 
 
     /**
@@ -39,7 +39,7 @@ public interface ICache<K, V> extends InitializingBean, DisposableBean {
      * @param key cache key
      * @return generic value
      */
-    <T> T get(final String key, final Class<T> clazz, Class... genericType);
+    <T> T get(final String key);
 
     /**
      * O(N) where N is the number of keys that will be removed.

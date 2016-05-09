@@ -65,7 +65,7 @@ public class CacheAspect {
         Class<?>[] genericType = cacheable.genericType();
 
         try {
-            retObj = cacheStorage.get(cacheKey, returnType, genericType);
+//            retObj = cacheStorage.get(cacheKey, returnType, genericType);
 
             if (retObj == null) {
 
@@ -75,9 +75,9 @@ public class CacheAspect {
                     if (retObj != null) {
                         int expire = cacheable.expire();
                         if (expire > 0) {
-                            cacheStorage.setEx(cacheKey, retObj, expire, genericType);
+//                            cacheStorage.setEx(cacheKey, retObj, expire, genericType);
                         } else {
-                            cacheStorage.set(cacheKey, retObj, genericType);
+//                            cacheStorage.set(cacheKey, retObj, genericType);
                         }
                     }
                 } catch (Throwable e) {
