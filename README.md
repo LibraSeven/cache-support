@@ -62,7 +62,7 @@ Codis Config Support
 
 ```
 ## Usage
-### Cache object
+### cache object
 ```
         
         @Cacheable(
@@ -76,62 +76,17 @@ Codis Config Support
 
 ```
 
-### Cache Collection
-#### Cache List
-```
-    
-    @Cacheable(
-            namespace = Constants.CACHE_NAMESPACE,
-            fieldsKey = {"#targetCode", "#dept", "#id"},
-            genericType = {MobileHomePageEntity.class}
-    )
-    @Override
-    public List<MobileHomePageEntity> queryMobileHomePage(String targetCode, String dept, Integer id) {
-        // DAO or Service
-    }
-
-
-```
-#### Cache Map
-```
-    
-    @Cacheable(
-            namespace = Constants.CACHE_NAMESPACE,
-            fieldsKey = {"#targetCode", "#dept", "#id"},
-            genericType = {String.class, MobileHomePageEntity.class}
-    )
-    @Override
-    public Map<String, MobileHomePageEntity> queryMobileHomePage(String targetCode, String dept, Integer id) {
-        // DAO or Service
-    }
-
-```
-#### Cache Generic Type
-```
-    
-    @Cacheable(
-            namespace = Constants.CACHE_NAMESPACE,
-            fieldsKey = {"#targetCode", "#dept", "#id"},
-            genericType = {Foo.class}
-    )
-    @Override
-    public Bar<Foo> queryMobileHomePage(String targetCode, String dept, Integer id) {
-        // DAO or Service
-    }
-    
-```
-#### set expire time
+### set expire time
 
 ```
     
     @Cacheable(
             namespace = Constants.CACHE_NAMESPACE,
             fieldsKey = {"#targetCode", "#dept", "#id"},
-            expire = 5000,
-            genericType = {Foo.class}
+            expire = 5000
     )
     @Override
-    public Bar<Foo> queryMobileHomePage(String targetCode, String dept, Integer id) {
+    public Bar queryMobileHomePage(String targetCode, String dept, Integer id) {
         // DAO or Service
     }
     
