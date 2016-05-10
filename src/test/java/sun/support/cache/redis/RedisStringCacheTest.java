@@ -8,9 +8,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import sun.support.cache.Foo;
 import sun.support.cache.Person;
+import sun.support.cache.StringCache;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +23,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath:spring-context.xml"})
 public class RedisStringCacheTest {
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private StringCache<Object> stringCache;
 
     @Test
     public void testSet(){
@@ -31,8 +33,45 @@ public class RedisStringCacheTest {
         list.add(foo1);
         list.add(foo2);
         Person person = new Person("tom", 23,list);
-        redisTemplate.opsForValue().set("foo", person);
-        person = (Person) redisTemplate.opsForValue().get("foo");
+        stringCache.set("foo", person);
+        person = stringCache.get("foo");
         System.out.println(person.getList().size());
     }
+
+    @Test
+    public void testKeys(){
+        stringCache.set("foo_1", "hello");
+        stringCache.set("foo_2", "world");
+        stringCache.set("foo_3", "welcome");
+
+        Set<String> keys = stringCache.keys("foo_*");
+        assertTrue(keys.size() > 0);
+    }
+
+    @Test
+    public void testMulDel(){
+        stringCache.multiDel("foo_*");
+        assertTrue(stringCache.keys("foo_*").size() == 0);
+    }
+
+    @Test
+    public void testExist(){
+        stringCache.set("foo", "world");
+        assertTrue(stringCache.exists("foo"));
+    }
+
+    @Test
+    public void testAOP(){
+        Person person = new Person("zz", 3);
+        Foo foo = person.getFoo("foo_hello", 34);
+        System.out.println(foo.getAddress());
+    }
+
+
+
+
+
+
+
+
 }

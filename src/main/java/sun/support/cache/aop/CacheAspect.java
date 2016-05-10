@@ -12,12 +12,17 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import sun.support.cache.StringCache;
 import sun.support.cache.annotations.CacheUpdate;
 import sun.support.cache.annotations.Cacheable;
+import sun.support.cache.exceptions.DynamicExpireSettingException;
+import sun.support.cache.handler.DynamicExpireHandler;
 import sun.support.cache.utils.AopUtils;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by yamorn on 2015/11/10.
@@ -61,35 +66,70 @@ public class CacheAspect {
         String[] fieldsKey = cacheable.fieldsKey();
         String cacheKey = parseKey(namespace, fieldsKey, method, pjp.getArgs());
         Class<?> returnType = ((MethodSignature) pjp.getSignature()).getReturnType();
-
-        Class<?>[] genericType = cacheable.genericType();
+        Class<? extends DynamicExpireHandler>[] handlers = cacheable.dynamicExpireHandler();
 
         try {
-//            retObj = cacheStorage.get(cacheKey, returnType, genericType);
-
+            retObj = cacheStorage.get(cacheKey);
             if (retObj == null) {
-
                 try {
                     retObj = pjp.proceed();
                     // Not cache Null object
                     if (retObj != null) {
                         int expire = cacheable.expire();
                         if (expire > 0) {
-//                            cacheStorage.setEx(cacheKey, retObj, expire, genericType);
+                            cacheStorage.setEx(cacheKey, retObj, expire);
+                        } else if (handlers.length == 0) {
+                            cacheStorage.set(cacheKey, retObj);
                         } else {
-//                            cacheStorage.set(cacheKey, retObj, genericType);
+                            Class<? extends DynamicExpireHandler> handler = handlers[0];
+                            String expireFieldName = cacheable.dynamicExpireFields()[0];
+                            String expireFieldFormat = cacheable.dynamicExpireFieldFormat()[0];
+                            if (StringUtils.isEmpty(expireFieldName) || StringUtils.isEmpty(expireFieldFormat)) {
+                                throw new DynamicExpireSettingException();
+                            }
+                            String expireFieldValue = getArgValue(expireFieldName, String.class, method, pjp.getArgs());
+                            Date dateArg = (new SimpleDateFormat(expireFieldFormat)).parse(expireFieldValue);
+                            long dynamicExpire = handler.newInstance().handler(dateArg);
+                            cacheStorage.setEx(cacheKey, retObj, dynamicExpire);
                         }
                     }
                 } catch (Throwable e) {
                     logger.error(e.getMessage());
                 }
             } else {
-                logger.info("Get " + cacheKey + " from cache.");
+                logger.debug("Get " + cacheKey + " from cache.");
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
         return retObj;
+    }
+
+    /**
+     * Get arg value
+     *
+     * @param fieldName arg field name
+     * @param argType   arg type
+     * @param method    aop method
+     * @param args      ProceedingJoinPoint
+     * @param <T>       return type
+     * @return value
+     */
+    private <T> T getArgValue(String fieldName, Class<T> argType, Method method, Object[] args) {
+        /**
+         * Get method parameters using the spring support library.
+         */
+        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+        String[] paramNameArray = u.getParameterNames(method);
+        /**
+         * Put all the parameters into SpEL context and analysis key using SpEL
+         */
+        ExpressionParser parser = new SpelExpressionParser();
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        for (int i = 0; i < paramNameArray.length; i++) {
+            context.setVariable(paramNameArray[i], args[i]);
+        }
+        return parser.parseExpression(fieldName).getValue(context, argType);
     }
 
 

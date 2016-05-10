@@ -1,5 +1,7 @@
 package sun.support.cache;
 
+import sun.support.cache.annotations.Cacheable;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -45,5 +47,10 @@ public class Person {
 
     public void setList(List<Foo> list) {
         this.list = list;
+    }
+
+    @Cacheable(namespace = "foo_test", fieldsKey = {"#name", "#age"})
+    public Foo getFoo(String name, int age){
+        return new Foo(name, age);
     }
 }

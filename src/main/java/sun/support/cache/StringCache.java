@@ -1,13 +1,6 @@
 package sun.support.cache;
 
-import sun.support.cache.exceptions.LostGenericTypeException;
-import sun.support.cache.exceptions.SerializeNotSupport;
-
 import java.nio.charset.Charset;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by 264929 on 2016/4/18.

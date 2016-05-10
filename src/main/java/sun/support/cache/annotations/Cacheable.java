@@ -1,5 +1,7 @@
 package sun.support.cache.annotations;
 
+import sun.support.cache.handler.DynamicExpireHandler;
+
 import java.lang.annotation.*;
 
 /**
@@ -28,6 +30,25 @@ public @interface Cacheable {
      */
     int expire() default -1;
 
-    Class<?>[] genericType() default {};
+    /**
+     * dynamic expire setting
+     *
+     * @return class
+     */
+    Class<? extends DynamicExpireHandler>[] dynamicExpireHandler() default {};
+
+    /**
+     * Dynamic expire field name
+     *
+     * @return string type
+     */
+    String[] dynamicExpireFields() default {};
+
+    /**
+     * Dynamic expire field format
+     *
+     * @return date string format
+     */
+    String[] dynamicExpireFieldFormat() default {};
 
 }
