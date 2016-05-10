@@ -23,7 +23,7 @@
     <!--</bean>-->
 
     <bean id="codisConnectionFactory" class="sun.support.cache.codis.CodisConnectionFactory">
-        <property name="database" value="0"/>
+        <property name="database" value="0"/> <!-- codis does not support db-select -->
         <property name="uris" value="sunyameng:2181"/>
         <property name="zkProxyDir" value="/zk/codis/db_test/proxy"/>
         <property name="timeout" value="30000" />
