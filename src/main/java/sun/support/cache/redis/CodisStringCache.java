@@ -2,6 +2,7 @@ package sun.support.cache.redis;
 
 import sun.support.cache.exceptions.CommandNotSupport;
 
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -17,4 +18,18 @@ public class CodisStringCache extends RedisStringCache {
         throw new CommandNotSupport("KEYS");
     }
 
+    @Override
+    public void flushDB() {
+        throw new CommandNotSupport("FLUSHDB");
+    }
+
+    @Override
+    public void flushAll() {
+        throw new CommandNotSupport("FLUSHALL");
+    }
+
+    @Override
+    public Properties info() {
+        throw new CommandNotSupport("INFO");
+    }
 }

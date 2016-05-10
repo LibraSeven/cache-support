@@ -87,7 +87,7 @@ public class RedisStringCache extends StringCache<Object> {
         return (T)redisTemplate.opsForList().rightPop(key);
     }
 
-    private void flushDB(){
+    public void flushDB(){
         redisTemplate.execute(new RedisCallback<Object>() {
             @Override
             public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -97,7 +97,7 @@ public class RedisStringCache extends StringCache<Object> {
         });
     }
 
-    private void flushAll() {
+    public void flushAll() {
         redisTemplate.execute(new RedisCallback<Object>() {
             @Override
             public Object doInRedis(RedisConnection connection) throws DataAccessException {
@@ -107,7 +107,7 @@ public class RedisStringCache extends StringCache<Object> {
         });
     }
 
-    private Properties info() {
+    public Properties info() {
         return redisTemplate.execute(new RedisCallback<Properties>() {
             @Override
             public Properties doInRedis(RedisConnection connection) throws DataAccessException {
