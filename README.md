@@ -6,6 +6,7 @@ So far, this cache-support only support redis. it will be extend more in the nex
 
 ## Configuration
 edit the spring configuration file. add as follows:
+
 Redis Config Support
 ```
        <!-- Redis Config -->
@@ -31,7 +32,8 @@ Redis Config Support
            <property name="redisTemplate" ref="redisTemplate"/>
        </bean>
    
-   ```
+```
+
 Codis Config Support
 ```
         <!-- Codis Config -->
