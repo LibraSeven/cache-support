@@ -38,6 +38,13 @@ public class RedisStringCacheTest {
     }
 
     @Test
+    public void testGet(){
+        Person p = stringCache.get("zz");
+        assertNull(p);
+    }
+
+
+    @Test
     public void testKeys(){
         stringCache.set("foo_1", "hello");
         stringCache.set("foo_2", "world");

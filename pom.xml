@@ -110,6 +110,13 @@
             <version>2.7.4</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+
         <!--tools -->
         <dependency>
             <groupId>commons-codec</groupId>
