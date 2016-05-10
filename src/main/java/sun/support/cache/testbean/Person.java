@@ -1,8 +1,8 @@
-package sun.support.cache;
+package sun.support.cache.testbean;
 
 import sun.support.cache.annotations.Cacheable;
+import sun.support.cache.testbean.Foo;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

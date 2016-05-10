@@ -1,4 +1,4 @@
-package sun.support.cache;
+package sun.support.cache.testbean;
 
 /**
  * Created by 264929 on 2016/5/9.

@@ -3,11 +3,10 @@ package sun.support.cache.redis;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sun.support.cache.Foo;
-import sun.support.cache.Person;
+import sun.support.cache.testbean.Foo;
+import sun.support.cache.testbean.Person;
 import sun.support.cache.StringCache;
 
 import java.util.LinkedList;
